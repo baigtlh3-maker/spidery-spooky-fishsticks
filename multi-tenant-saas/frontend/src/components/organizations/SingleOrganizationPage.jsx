@@ -406,21 +406,13 @@ export const SingleOrganizationPage = () => {
                       </strong>
                     </div>
                     <div>
-<<<<<<< HEAD
+
                       <span>Duration</span>
                       <strong>
                         {formatShiftDuration(shift.start_time, shift.end_time)}
                       </strong>
                     </div>
-=======
-                      <span>Total hours</span>
-                      <strong>
-                        {formatShiftDuration(
-                          shift.start_time,
-                          shift.end_time
-                        )}
-                      </strong>                    </div>
->>>>>>> 61c9d8c (did few edits)
+
                   </div>
                 </div>
               </article>
@@ -446,16 +438,15 @@ export const SingleOrganizationPage = () => {
                         dateStyle: "medium",
                         timeStyle: "short",
                       })}
-<<<<<<< HEAD
-                      <> · {formatShiftDuration(shift.start_time, shift.end_time)}</>
-=======
+                      {formatShiftDuration(shift.start_time, shift.end_time)}
+
                       {shift.shift_duration && (
                         <>
                           {" · "}
                           {Number(shift.shift_duration.split(":")[0])} hrs
                         </>
                       )}
->>>>>>> 61c9d8c (did few edits)
+
                     </p>
                   </div>
                 </div>
