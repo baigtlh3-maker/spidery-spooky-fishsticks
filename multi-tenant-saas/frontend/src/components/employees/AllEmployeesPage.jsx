@@ -165,12 +165,12 @@ const AllEmployeesPage = () => {
             <div key={employee.employee_id || employee.id} className="emp-row sa-card">
               <div className="emp-row__main">
                 <div className="emp-row__avatar">
-                  {employee.user?.name?.charAt(0).toUpperCase() || "?"}
+                  {employee.name?.charAt(0).toUpperCase() || "?"}
                 </div>
                 <div>
-                  <h2>{employee.user?.name || "Unnamed"}</h2>
+                  <h2>{employee.full_name || "Unnamed"}</h2>
                   <span>
-                    {employee.employee_code || "—"} · {employee.user?.email || "No email"}
+                    {employee.employee_code || "—"} · {employee.email || "No email"}
                   </span>
                 </div>
               </div>

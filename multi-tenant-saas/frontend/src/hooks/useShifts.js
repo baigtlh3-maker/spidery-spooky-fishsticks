@@ -33,6 +33,10 @@ export const useShifts = (organizationId) => {
           { headers: { Authorization: `Bearer ${token}` } }
 
         );
+
+        const res1 = await apiClient.get('/admin/shifts/all', { headers: { Authorization: `Bearer ${token}` } });
+        setShiftsCounts(res1.data.data || []);
+        console.log("Shifts counts:", res1);
         if (!cancelled) {
           setResult({
             organizationId,
@@ -45,9 +49,9 @@ export const useShifts = (organizationId) => {
           setResult({ organizationId, token, shifts: [] });
           setError(
             fetchError?.response?.data?.error ||
-              fetchError?.response?.data?.message ||
-              fetchError.message ||
-              "Unable to load shifts."
+            fetchError?.response?.data?.message ||
+            fetchError.message ||
+            "Unable to load shifts."
           );
         }
       } finally {
@@ -70,6 +74,6 @@ export const useShifts = (organizationId) => {
     loading ||
     (Boolean(organizationId) && !resultMatchesCurrentSelection);
 
-  return { shifts: currentShifts, loading: isLoading, error, refetch };
+  return { shifts: currentShifts, loading: isLoading, error, refetch, shiftsCounts };
 
 };

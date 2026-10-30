@@ -81,7 +81,28 @@ export const SingleOrganizationPage = () => {
     const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
     return shiftDate >= startOfMonth && shiftDate < startOfNextMonth;
   });
+  const formatShiftDuration = (startTime, endTime) => {
+    const start = new Date(startTime).getTime();
+    const end = new Date(endTime).getTime();
 
+    if (
+      !Number.isFinite(start) ||
+      !Number.isFinite(end) ||
+      end <= start
+    ) {
+      return "—";
+    }
+
+    const totalMinutes = Math.round((end - start) / 60000);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    if (minutes === 0) return `${hours} hrs`;
+
+    return hours > 0
+      ? `${hours} hrs ${minutes} mins`
+      : `${minutes} mins`;
+  };
   const fetchAllDetails = async () => {
     if (!id) return;
     try {
@@ -103,9 +124,9 @@ export const SingleOrganizationPage = () => {
     } catch (err) {
       setError(
         err?.response?.data?.error ||
-          err?.response?.data?.message ||
-          err.message ||
-          "Failed to fetch organization data."
+        err?.response?.data?.message ||
+        err.message ||
+        "Failed to fetch organization data."
       );
     } finally {
       setLoading(false);
@@ -146,8 +167,8 @@ export const SingleOrganizationPage = () => {
     } catch (err) {
       setError(
         err?.response?.data?.error ||
-          err?.response?.data?.message ||
-          "Delete failed."
+        err?.response?.data?.message ||
+        "Delete failed."
       );
       setDeleteTarget(null);
     } finally {
@@ -385,11 +406,21 @@ export const SingleOrganizationPage = () => {
                       </strong>
                     </div>
                     <div>
+<<<<<<< HEAD
                       <span>Duration</span>
                       <strong>
                         {formatShiftDuration(shift.start_time, shift.end_time)}
                       </strong>
                     </div>
+=======
+                      <span>Total hours</span>
+                      <strong>
+                        {formatShiftDuration(
+                          shift.start_time,
+                          shift.end_time
+                        )}
+                      </strong>                    </div>
+>>>>>>> 61c9d8c (did few edits)
                   </div>
                 </div>
               </article>
@@ -415,7 +446,16 @@ export const SingleOrganizationPage = () => {
                         dateStyle: "medium",
                         timeStyle: "short",
                       })}
+<<<<<<< HEAD
                       <> · {formatShiftDuration(shift.start_time, shift.end_time)}</>
+=======
+                      {shift.shift_duration && (
+                        <>
+                          {" · "}
+                          {Number(shift.shift_duration.split(":")[0])} hrs
+                        </>
+                      )}
+>>>>>>> 61c9d8c (did few edits)
                     </p>
                   </div>
                 </div>
